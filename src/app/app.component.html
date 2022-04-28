@@ -7,6 +7,7 @@
     </head>
     <body style="background-color:#FEFFD3;">
 
+
       <div class="text-center">
         <img src="../assets/javascript_img.png" class="img-fluid" alt="">
         <h1>{{ title }}</h1>
@@ -14,15 +15,18 @@
       <br/>
       <form class="needs-validation">
         <div class="form-group">
-          <input #name type="text" placeholder="e.g. JavaScript" (keydown.enter)="onKeypress($event)" (keydown.enter)="handleClear()" class="form-control" required>
+          <input #name type="text" placeholder="e.g. JavaScript" class="form-control" (keydown.enter)="onKeypress($event)" (keydown.enter)="handleClear()" required>
           <small id="emailHelp" class="form-text text-muted">write any programming language</small>
         </div>
       </form>
       <br/><br/>
-      <ul class="list-group" *ngFor = "let language of languageNames; let i = index" >
+      <mat-paginator [length]="languageNames.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="handlePage($event)" aria-label="Select paginita">
+      </mat-paginator>
+      <ul class="list-group" *ngFor = "let language of languageNames | paginate:pageSize:pageNumber" >
         <li class="list-group-item">{{ language }}</li>
     
       </ul>
+
 
     </body>
 </html>
